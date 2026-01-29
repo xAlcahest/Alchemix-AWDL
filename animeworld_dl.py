@@ -336,12 +336,16 @@ class AnimeWorldDownloader:
 
 # CLI Commands
 
-@click.group()
+@click.group(invoke_without_command=True)
 @click.version_option(version=__version__)
 @click.option("--retest", is_flag=True, help="Re-run speed test")
+@click.option("--interactive", "-i", is_flag=True, help="Run in interactive mode")
 @click.pass_context
-def cli(ctx, retest):
-    """AnimeWorld Downloader - Download anime from AnimeWorld.ac"""
+def cli(ctx, retest, interactive):
+    """AnimeWorld Downloader - Download anime from AnimeWorld.ac
+
+    Run without arguments to enter interactive menu mode.
+    """
     ctx.ensure_object(dict)
     app = AnimeWorldDownloader()
     ctx.obj["app"] = app
@@ -360,6 +364,12 @@ def cli(ctx, retest):
         app.config["speedtest"]["connections"] = connections
         app.config_manager.save()
         print_success(f"Updated: {connections} connections for {download_mbps:.2f} Mbps")
+
+    # If no command is provided, enter interactive mode
+    if ctx.invoked_subcommand is None:
+        from animeworld_dl.ui.interactive import InteractiveMenu
+        menu = InteractiveMenu(app)
+        menu.run()
 
 
 @cli.command()

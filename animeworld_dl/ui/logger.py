@@ -138,7 +138,7 @@ def get_progress() -> Progress:
             TransferSpeedColumn(),
             TimeRemainingColumn(),
             console=console,
-            transient=False
+            transient=True  # Auto-clear completed progress bars
         )
     return _progress
 

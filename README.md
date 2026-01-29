@@ -4,6 +4,7 @@ Advanced CLI downloader for AnimeWorld.ac with intelligent connection management
 
 ## Features
 
+- **Interactive Menu Mode**: Beautiful menu-driven interface with keyboard navigation
 - **Intelligent Speed Test**: Automatic connection speed detection with adaptive Axel connection counts
 - **Multi-Architecture Support**: x86_64 and ARM64 for Windows/Linux
 - **Custom Progress Bars**: Beautiful ASCII art progress visualization with Rich library
@@ -39,21 +40,43 @@ python animeworld_dl.py --help
 
 ## Usage
 
+### Interactive Menu Mode
+
+Simply run without arguments to enter the interactive menu:
+
+```bash
+python animeworld_dl.py
+```
+
+This launches a user-friendly menu where you can:
+- Search and browse anime
+- List episodes with download status
+- Download with guided prompts
+- View configuration and statistics
+- Re-test connection speed
+
+### Command-Line Mode
+
+For scripting and automation, use direct commands:
+
 ```bash
 # Search for an anime
 python animeworld_dl.py search "jujutsu kaisen"
 
 # List episodes
-python animeworld_dl.py list "princession orchestra"
+python animeworld_dl.py list "https://www.animeworld.ac/play/anime-url"
 
 # Download all episodes
-python animeworld_dl.py download "princession orchestra" --all
+python animeworld_dl.py download "ANIME_URL" --episodes all
 
 # Download specific range
-python animeworld_dl.py download "jujutsu kaisen" --episodes 1-24
+python animeworld_dl.py download "ANIME_URL" --episodes 1-24
 
 # Download specific episodes
-python animeworld_dl.py download "frieren" --episodes 1,5,10,12
+python animeworld_dl.py download "ANIME_URL" --episodes 1,5,10,12
+
+# Override connection count
+python animeworld_dl.py download "ANIME_URL" --episodes all --connections 64
 
 # Retest your connection
 python animeworld_dl.py --retest
