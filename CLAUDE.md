@@ -52,7 +52,7 @@ python animeworld_dl.py --retest                 # Re-run speed test
 
 ### Core Design Pattern
 
-The application follows a modular architecture with lazy initialization of heavy components (Axel, scraper, downloader) in the main `AnimeWorldDownloader` class. This ensures the config and database are always available while downloads and scraping are only initialized when needed.
+The application follows a modular architecture with lazy initialization of heavy components (Axel, scraper, downloader) in the main `AlchemixDownloader` class. This ensures the config and database are always available while downloads and scraping are only initialized when needed.
 
 ### Module Structure
 
@@ -75,7 +75,7 @@ The application follows a modular architecture with lazy initialization of heavy
 ### Key Data Flow
 
 1. **First Run**: Config doesn't exist → `run_first_time_setup()` → speedtest → calculate connections → save TOML
-2. **Search**: User query → `AnimeWorldScraper.search_anime()` → fuzzy matching with RapidFuzz → display results
+2. **Search**: User query → `AlchemixScraper.search_anime()` → fuzzy matching with RapidFuzz → display results
 3. **Download**: Anime URL → scraper gets episodes → `get_video_url()` extracts direct link → `DownloadManager` uses Axel → track in SQLite
 
 ### Connection Tier System
