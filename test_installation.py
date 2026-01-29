@@ -60,7 +60,7 @@ try:
     from animeworld_dl.core.speedtest_manager import SpeedTester
     print("  ✓ speedtest_manager")
 
-    from animeworld_dl.core.scraper import AnimeWorldScraper
+    from animeworld_dl.core.scraper import AlchemixScraper
     print("  ✓ scraper")
 
     from animeworld_dl.core.downloader import DownloadManager

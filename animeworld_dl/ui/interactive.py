@@ -15,9 +15,9 @@ i18n = get_i18n()
 
 
 class InteractiveMenu:
-    """Interactive menu for AnimeWorld Downloader"""
+    """Interactive menu for Alchemix-AWDL"""
 
-    BANNER = """
+    BANNER = r"""
     _    _      _                    _           ___        ______  _
    / \  | | ___| |__   ___ _ __ ___ (_)_  __    / \ \      / /  _ \| |
   / _ \ | |/ __| '_ \ / _ \ '_ ` _ \| \ \/ /   / _ \ \ /\ / /| | | | |
@@ -30,7 +30,7 @@ class InteractiveMenu:
         Initialize interactive menu
 
         Args:
-            app: AnimeWorldDownloader instance
+            app: AlchemixDownloader instance
         """
         self.app = app
         self.running = True

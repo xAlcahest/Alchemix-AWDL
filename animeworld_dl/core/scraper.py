@@ -18,7 +18,7 @@ HEADERS = {
 }
 
 
-class AnimeWorldScraper:
+class AlchemixScraper:
     """Scraper for AnimeWorld website"""
 
     def __init__(self, timeout: int = 10):

@@ -20,7 +20,7 @@ from rapidfuzz import fuzz
 
 from animeworld_dl.core.config import Config
 from animeworld_dl.core.speedtest_manager import SpeedTester, get_current_timestamp
-from animeworld_dl.core.scraper import AnimeWorldScraper
+from animeworld_dl.core.scraper import AlchemixScraper
 from animeworld_dl.core.downloader import DownloadManager
 from animeworld_dl.core.database import Database
 from animeworld_dl.utils.axel_manager import AxelManager
@@ -43,8 +43,8 @@ BANNER = r"""
 logger = get_logger(__name__)
 
 
-class AnimeWorldDownloader:
-    """Main application class"""
+class AlchemixDownloader:
+    """Main Alchemix-AWDL application class"""
 
     def __init__(self):
         self.config_manager = Config()
@@ -66,7 +66,7 @@ class AnimeWorldDownloader:
 
         # Initialize components (lazy)
         self.axel_manager: AxelManager = None
-        self.scraper: AnimeWorldScraper = None
+        self.scraper: AlchemixScraper = None
         self.downloader: DownloadManager = None
 
     def _init_components(self):
@@ -78,7 +78,7 @@ class AnimeWorldDownloader:
 
         if not self.scraper:
             timeout = self.config_manager.get("network", "http_timeout", 10)
-            self.scraper = AnimeWorldScraper(timeout)
+            self.scraper = AlchemixScraper(timeout)
 
         if not self.downloader:
             self.downloader = DownloadManager(self.axel_manager, self.config)
@@ -347,7 +347,7 @@ def cli(ctx, retest, interactive):
     Run without arguments to enter interactive menu mode.
     """
     ctx.ensure_object(dict)
-    app = AnimeWorldDownloader()
+    app = AlchemixDownloader()
     ctx.obj["app"] = app
 
     # First time setup
