@@ -1,7 +1,7 @@
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 with Additional Terms
 
-Copyright (c) 2026 [Your Name/Alcahest]
+Copyright (c) 2026 Alcahest
 
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike
 4.0 International License with the following ADDITIONAL MANDATORY TERMS:
@@ -19,9 +19,7 @@ TERMS OF USE
 2. MANDATORY NOTIFICATION
    If you use, modify, fork, or redistribute this code in any form:
    a) You MUST notify the original author via:
-      - GitHub issue on the original repository, OR
-      - Email to [your-email@example.com], OR
-      - Direct message on [your preferred contact method]
+      - GitHub issue on the original repository at https://github.com/xAlcahest/Alchemix-AWDL
 
    b) Your notification must include:
       - Description of your use case
@@ -46,14 +44,14 @@ TERMS OF USE
 
    a) In the source code:
       """
-      Original work by [Your Name/Alcahest]
-      Source: https://github.com/[your-repo]/AnimeWorldDownloader
+      Original work by Alcahest
+      Source: https://github.com/xAlcahest/Alchemix-AWDL
       Licensed under CC BY-NC-SA 4.0 with Additional Terms
       """
 
    b) In documentation/README:
-      "Based on AnimeWorld Downloader by [Your Name/Alcahest]
-       (https://github.com/[your-repo]/AnimeWorldDownloader)"
+      "Based on Alchemix AWDL by Alcahest
+       (https://github.com/xAlcahest/Alchemix-AWDL)"
 
    c) In user-facing interfaces (if applicable):
       Credit visible to end users
@@ -91,9 +89,8 @@ CONTACT FOR PERMISSIONS
 ==============================================================================
 
 For commercial use, exceptions, or questions:
-- GitHub: https://github.com/[your-username]
-- Email: [your-email@example.com]
-- [Other contact method]
+- GitHub: https://github.com/xAlcahest
+- GitHub Issues: https://github.com/xAlcahest/Alchemix-AWDL/issues
 
 ==============================================================================
 FULL LICENSE TEXT
