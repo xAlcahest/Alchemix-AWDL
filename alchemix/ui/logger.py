@@ -80,12 +80,12 @@ def setup_logging(log_dir: Optional[Path] = None, verbosity: str = "normal"):
     # Map verbosity to log level
     level_map = {
         "quiet": logging.ERROR,
-        "normal": logging.INFO,
+        "normal": logging.WARNING,  # Show only warnings and errors by default
         "verbose": logging.INFO,
         "debug": logging.DEBUG
     }
 
-    level = level_map.get(verbosity, logging.INFO)
+    level = level_map.get(verbosity, logging.WARNING)
 
     # Console handler
     console_handler = I18nRichHandler(

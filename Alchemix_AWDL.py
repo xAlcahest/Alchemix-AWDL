@@ -46,7 +46,7 @@ logger = get_logger(__name__)
 class AlchemixDownloader:
     """Main Alchemix-AWDL application class"""
 
-    def __init__(self):
+    def __init__(self, verbosity: str = None):
         self.config_manager = Config()
         self.config = self.config_manager.load()
         self.i18n = get_i18n()
@@ -55,9 +55,10 @@ class AlchemixDownloader:
         lang = self.config_manager.get("ui", "language", "en")
         self.i18n.set_language(lang)
 
-        # Setup logging
+        # Setup logging - use provided verbosity or config default
         log_dir = self.config_manager.get_logs_dir() if self.config_manager.get("logging", "enabled", True) else None
-        verbosity = self.config_manager.get("ui", "verbosity", "normal")
+        if verbosity is None:
+            verbosity = self.config_manager.get("ui", "verbosity", "normal")
         setup_logging(log_dir, verbosity)
 
         # Initialize database
@@ -296,9 +297,8 @@ class AlchemixDownloader:
                     # Mark as downloaded
                     file_size = output_path.stat().st_size if output_path.exists() else 0
                     self.db.mark_downloaded(episode["id"], str(output_path), file_size)
-                    print_success(f"Downloaded: {filename}")
                 else:
-                    print_error(f"Failed to download: {filename}")
+                    console.print(f"[red]✗[/red] Failed: {filename}")
 
             except KeyboardInterrupt:
                 print_warning("\nDownload interrupted by user")
@@ -372,14 +372,25 @@ class AlchemixDownloader:
 @click.version_option(version=__version__)
 @click.option("--retest", is_flag=True, help="Re-run speed test")
 @click.option("--interactive", "-i", is_flag=True, help="Run in interactive mode")
+@click.option("--verbose", "-v", is_flag=True, help="Show verbose output (INFO level)")
+@click.option("--quiet", "-q", is_flag=True, help="Show only errors")
 @click.pass_context
-def cli(ctx, retest, interactive):
+def cli(ctx, retest, interactive, verbose, quiet):
     """AnimeWorld Downloader - Download anime from AnimeWorld.ac
 
     Run without arguments to enter interactive menu mode.
     """
     ctx.ensure_object(dict)
-    app = AlchemixDownloader()
+
+    # Determine verbosity level
+    if quiet:
+        verbosity = "quiet"
+    elif verbose:
+        verbosity = "verbose"
+    else:
+        verbosity = "normal"
+
+    app = AlchemixDownloader(verbosity=verbosity)
     ctx.obj["app"] = app
 
     # First time setup

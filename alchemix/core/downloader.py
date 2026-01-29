@@ -5,12 +5,13 @@ Handles downloading with Axel, retry logic, and resume support
 
 import os
 import time
+import sys
 import subprocess
 import shutil
 from pathlib import Path
 from typing import Optional, Callable
 from ..utils.axel_manager import AxelManager, AxelError
-from ..ui.logger import get_logger, get_progress
+from ..ui.logger import get_logger, get_progress, console
 from rich.progress import TaskID
 
 logger = get_logger(__name__)
@@ -99,7 +100,7 @@ class DownloadManager:
             # Store current download for interrupt handling
             self.current_download = output_path
 
-            logger.info("download.starting", filename=output_path.name)
+            console.print(f"[cyan]Downloading:[/cyan] {output_path.name}")
 
             # Build Axel command
             cmd = self.axel_manager.build_command(
@@ -111,35 +112,25 @@ class DownloadManager:
             )
 
             # Execute download
+            # Let Axel show its own progress bar by not capturing stdout
             process = subprocess.Popen(
                 cmd,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=True,
-                bufsize=1
+                stdout=sys.stdout,  # Show Axel's progress bar
+                stderr=subprocess.PIPE,  # Capture errors
+                text=True
             )
 
-            # Monitor progress and collect output
-            output_lines = []
-            for line in iter(process.stdout.readline, ''):
-                if line:
-                    line = line.strip()
-                    output_lines.append(line)
-                    logger.debug("axel.output", output=line)
-
-                    # Parse progress if callback provided
-                    if progress_callback:
-                        progress_callback(line)
-
-            process.wait()
+            # Wait for completion
+            _, stderr_output = process.communicate()
 
             if process.returncode == 0:
-                logger.success("download.completed", filename=output_path.name)
+                console.print(f"[green]✓[/green] Completed: {output_path.name}")
                 self.current_download = None
                 return True
             else:
-                # Show last few lines of output for debugging
-                error_output = "\n".join(output_lines[-5:]) if output_lines else "No output"
+                # Show error output
+                error_lines = stderr_output.strip().split('\n')[-5:] if stderr_output else []
+                error_output = "\n".join(error_lines) if error_lines else "No error output"
                 logger.error("download.failed", error=f"Axel exited with code {process.returncode}", details=error_output)
                 raise DownloadError(f"Axel failed (code {process.returncode}): {error_output}")
 
