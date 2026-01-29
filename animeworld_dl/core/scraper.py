@@ -266,11 +266,22 @@ class AlchemixScraper:
 
             # Try multiple methods to extract video URL
 
-            # Method 1: Look for download link
-            download_link = soup.select_one("a[href*='download'], a.download-button")
-            if download_link:
-                download_url = download_link.get("href", "")
-                if download_url:
+            # Method 1: Look for alternative download link (direct MP4, not PHP)
+            # Priority: alternativeDownloadLink > download attribute > downloadLink
+            alternative_link = soup.select_one("a#alternativeDownloadLink, a[download][href*='.mp4']")
+            if alternative_link:
+                download_url = alternative_link.get("href", "")
+                if download_url and download_url.endswith(".mp4"):
+                    if not download_url.startswith("http"):
+                        download_url = urljoin(BASE_URL, download_url)
+                    logger.success("scraper.video_found", url=download_url)
+                    return download_url
+
+            # Method 2: Look for any direct .mp4 link (avoid PHP files)
+            mp4_links = soup.select("a[href$='.mp4']")
+            for link in mp4_links:
+                download_url = link.get("href", "")
+                if download_url and "download-file.php" not in download_url:
                     if not download_url.startswith("http"):
                         download_url = urljoin(BASE_URL, download_url)
                     logger.success("scraper.video_found", url=download_url)

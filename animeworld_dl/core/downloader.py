@@ -84,6 +84,18 @@ class DownloadManager:
                     logger.error("download.failed", error="Insufficient disk space")
                     return False
 
+            # Clean up partial download files from previous failed attempts
+            # Axel creates .st files for resume state
+            state_file = Path(str(output_path) + ".st")
+            if state_file.exists():
+                logger.debug("download.removing_state_file", file=str(state_file))
+                state_file.unlink()
+
+            # Also remove partial output file if it exists without state file
+            if output_path.exists() and not state_file.exists():
+                logger.debug("download.removing_partial_file", file=str(output_path))
+                output_path.unlink()
+
             # Store current download for interrupt handling
             self.current_download = output_path
 
@@ -107,10 +119,12 @@ class DownloadManager:
                 bufsize=1
             )
 
-            # Monitor progress
+            # Monitor progress and collect output
+            output_lines = []
             for line in iter(process.stdout.readline, ''):
                 if line:
                     line = line.strip()
+                    output_lines.append(line)
                     logger.debug("axel.output", output=line)
 
                     # Parse progress if callback provided
@@ -124,8 +138,10 @@ class DownloadManager:
                 self.current_download = None
                 return True
             else:
-                logger.error("download.failed", error=f"Axel exited with code {process.returncode}")
-                return False
+                # Show last few lines of output for debugging
+                error_output = "\n".join(output_lines[-5:]) if output_lines else "No output"
+                logger.error("download.failed", error=f"Axel exited with code {process.returncode}", details=error_output)
+                raise DownloadError(f"Axel failed (code {process.returncode}): {error_output}")
 
         except Exception as e:
             logger.error("download.failed", error=str(e))
@@ -176,6 +192,13 @@ class DownloadManager:
             except KeyboardInterrupt:
                 logger.warning("download.interrupted")
                 raise
+
+            except DownloadError as e:
+                logger.error("download.attempt_failed", attempt=attempt, error=str(e))
+                if attempt >= max_attempts:
+                    # On final attempt, show the full error
+                    logger.error("download.final_error", details=str(e))
+                attempt += 1
 
             except Exception as e:
                 logger.error("download.attempt_failed", attempt=attempt, error=str(e))
