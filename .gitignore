@@ -57,3 +57,4 @@ cache/
 .pytest_cache/
 .coverage
 htmlcov/
+/Video_DL
