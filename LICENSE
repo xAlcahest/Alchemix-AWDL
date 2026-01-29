@@ -1,0 +1,114 @@
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+with Additional Terms
+
+Copyright (c) 2026 [Your Name/Alcahest]
+
+This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike
+4.0 International License with the following ADDITIONAL MANDATORY TERMS:
+
+==============================================================================
+TERMS OF USE
+==============================================================================
+
+1. ATTRIBUTION REQUIREMENT
+   You must give appropriate credit to the original author, provide a link to
+   this repository, and indicate if changes were made. You may do so in any
+   reasonable manner, but not in any way that suggests the licensor endorses
+   you or your use.
+
+2. MANDATORY NOTIFICATION
+   If you use, modify, fork, or redistribute this code in any form:
+   a) You MUST notify the original author via:
+      - GitHub issue on the original repository, OR
+      - Email to [your-email@example.com], OR
+      - Direct message on [your preferred contact method]
+
+   b) Your notification must include:
+      - Description of your use case
+      - Link to your repository/project (if applicable)
+      - Confirmation of compliance with these terms
+
+3. NON-COMMERCIAL USE ONLY
+   You may not use this work for commercial purposes without explicit written
+   permission from the original author. Commercial use includes but is not
+   limited to:
+   - Selling the software or modified versions
+   - Using in a commercial service or product
+   - Generating revenue directly or indirectly from this code
+
+4. SHARE-ALIKE
+   If you remix, transform, or build upon this work, you must distribute your
+   contributions under the same license as the original, including these
+   additional terms.
+
+5. CREDIT REQUIREMENTS
+   All distributions, modifications, and derivative works MUST include:
+
+   a) In the source code:
+      """
+      Original work by [Your Name/Alcahest]
+      Source: https://github.com/[your-repo]/AnimeWorldDownloader
+      Licensed under CC BY-NC-SA 4.0 with Additional Terms
+      """
+
+   b) In documentation/README:
+      "Based on AnimeWorld Downloader by [Your Name/Alcahest]
+       (https://github.com/[your-repo]/AnimeWorldDownloader)"
+
+   c) In user-facing interfaces (if applicable):
+      Credit visible to end users
+
+6. NO WARRANTY
+   This software is provided "as is", without warranty of any kind, express or
+   implied, including but not limited to the warranties of merchantability,
+   fitness for a particular purpose and noninfringement.
+
+7. MODIFICATIONS
+   - All modifications must be clearly documented
+   - Modified versions must be clearly marked as such
+   - You may not remove or obscure the original author's credits
+
+8. VIOLATION CONSEQUENCES
+   Failure to comply with ANY of these terms will result in:
+   - Immediate termination of your license
+   - Legal action if deemed necessary
+   - Public notification of violation
+
+==============================================================================
+HOW TO COMPLY
+==============================================================================
+
+If you want to use this code:
+
+1. Fork or download the repository
+2. Notify the author as specified in Section 2
+3. Add proper attribution as specified in Section 5
+4. If commercial use is needed, contact the author for permission
+5. Maintain this license in all copies and derivatives
+
+==============================================================================
+CONTACT FOR PERMISSIONS
+==============================================================================
+
+For commercial use, exceptions, or questions:
+- GitHub: https://github.com/[your-username]
+- Email: [your-email@example.com]
+- [Other contact method]
+
+==============================================================================
+FULL LICENSE TEXT
+==============================================================================
+
+The full Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+International license can be found at:
+https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+These additional terms supplement (not replace) the CC BY-NC-SA 4.0 license.
+In case of conflict, the MORE RESTRICTIVE terms apply.
+
+==============================================================================
+
+By using this software, you acknowledge that you have read, understood, and
+agree to be bound by these terms.
+
+Last Updated: 2026-01-29

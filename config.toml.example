@@ -1,0 +1,122 @@
+# AnimeWorld Downloader - Configuration File Example
+# This file is automatically created on first run
+# Location: ~/.config/animeworld-dl/config.toml
+
+[speedtest]
+# Last measured download speed in Mbps
+last_speed_mbps = 0
+
+# Date of last speed test (ISO format)
+last_test_date = ""
+
+# Number of connections based on speed
+connections = 4
+
+# Speed test timeout in seconds
+timeout = 30
+
+[download]
+# Directory where anime will be downloaded
+output_dir = "~/Downloads/AnimeWorld"
+
+# Naming pattern for downloaded files
+# Options: "original", "season_episode", "custom"
+# - original: Keep filename from server
+# - season_episode: Format as "Anime Name - S01E01.mp4"
+# - custom: Use custom_pattern below
+naming_pattern = "original"
+
+# Custom naming pattern (used when naming_pattern = "custom")
+# Available placeholders: {anime_name}, {season}, {episode}, {ext}
+custom_pattern = "{anime_name} - S{season:02d}E{episode:02d}.{ext}"
+
+# Number of episodes to download in parallel
+# 1 = sequential (one at a time)
+# 2-4 = parallel download
+parallel_episodes = 1
+
+# Number of retry attempts for failed downloads
+retry_attempts = 3
+
+# Use exponential backoff for retries
+retry_backoff = true
+
+# Automatically resume interrupted downloads
+auto_resume = true
+
+# Check available disk space before downloading
+check_disk_space = true
+
+[network]
+# HTTP request timeout in seconds
+http_timeout = 10
+
+# Download timeout in seconds (0 = no timeout)
+download_timeout = 0
+
+# Speed limit in MB/s (0 = unlimited)
+# Example: 50 = limit to 50 MB/s
+speed_limit = 0
+
+# User agent for HTTP requests
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+
+[ui]
+# Interface language: "en" or "it"
+language = "en"
+
+# Verbosity level: "quiet", "normal", "verbose", "debug"
+verbosity = "normal"
+
+# Show speed in Mbps
+show_speed_mbps = true
+
+# Show speed in MB/s
+show_speed_mbs = true
+
+# Use ASCII art progress bars
+ascii_progress = true
+
+[search]
+# Fuzzy search threshold (0-100)
+# Lower = more permissive, higher = stricter
+fuzzy_threshold = 70
+
+# Prefer dubbed versions by default
+prefer_dub = false
+
+# Prefer subbed versions by default
+prefer_sub = false
+
+# Ask user for Sub-ITA or Dub-ITA preference
+ask_preference = true
+
+[axel]
+# Use system-installed Axel if available
+use_system_binary = true
+
+# Custom path to Axel binary (leave empty for auto-detect)
+binary_path = ""
+
+# Download Axel binary if not found
+download_if_missing = true
+
+[logging]
+# Enable logging to file
+enabled = true
+
+# Maximum log file size in MB
+max_size_mb = 10
+
+# Number of backup log files to keep
+backup_count = 5
+
+[advanced]
+# Check for updates on startup
+check_updates = true
+
+# Cache expiration in days
+cache_expire_days = 7
+
+# Database path (leave empty for default: ~/.config/animeworld-dl/animeworld.db)
+database_path = ""
