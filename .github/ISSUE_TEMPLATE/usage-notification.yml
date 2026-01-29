@@ -1,0 +1,79 @@
+name: Usage Notification
+description: Notify the author about usage, modification, or redistribution of this code (required by LICENSE)
+title: "[USAGE] "
+labels: ["usage-notification"]
+assignees:
+  - xAlcahest
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## License Compliance Notification
+
+        Thank you for using Alchemix AWDL! According to the LICENSE terms (CC BY-NC-SA 4.0 with Additional Terms),
+        you must notify the author when using, modifying, forking, or redistributing this code.
+
+        Please fill out the information below to comply with the license requirements.
+
+  - type: dropdown
+    id: use-type
+    attributes:
+      label: Type of Use
+      description: How are you using this code?
+      options:
+        - Using as-is (no modifications)
+        - Modified/Forked version
+        - Redistributing (with or without changes)
+        - Educational/Learning purposes
+        - Research project
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case Description
+      description: Briefly describe how you're using this code
+      placeholder: |
+        Example: "I'm using this downloader for personal anime downloads and made some modifications to add support for..."
+    validations:
+      required: true
+
+  - type: input
+    id: repository
+    attributes:
+      label: Your Repository/Project Link (if applicable)
+      description: If you have a public repository or project, please share the link
+      placeholder: https://github.com/username/project
+
+  - type: checkboxes
+    id: compliance
+    attributes:
+      label: License Compliance Confirmation
+      description: Please confirm you understand and will comply with the license terms
+      options:
+        - label: I have included proper attribution in my source code (as specified in LICENSE section 5a)
+          required: true
+        - label: I have included attribution in my documentation/README (as specified in LICENSE section 5b)
+          required: true
+        - label: This is for non-commercial use only (or I will contact the author for commercial permission)
+          required: true
+        - label: If I distribute my work, it will be under the same license (CC BY-NC-SA 4.0 with Additional Terms)
+          required: true
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional Information
+      description: Any other information you'd like to share
+      placeholder: Questions, feedback, suggestions...
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+
+        **Note**: This notification is required by the license terms. Thank you for your compliance!
+
+        For questions about commercial use or licensing exceptions, please contact via GitHub.
