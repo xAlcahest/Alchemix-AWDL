@@ -1,0 +1,114 @@
+name: Feature Request
+description: Suggest a new feature or enhancement for Alchemix AWDL
+title: "[FEATURE] "
+labels: ["enhancement"]
+assignees:
+  - xAlcahest
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request
+
+        Thank you for suggesting a new feature! Please provide as much detail as possible
+        about what you'd like to see added to Alchemix AWDL.
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: A clear and concise description of the feature you'd like to see
+      placeholder: |
+        Example: "Add support for downloading multiple anime simultaneously in parallel..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve? What is the use case?
+      placeholder: |
+        Example: "Currently I have to wait for one anime to finish downloading before starting another..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: How would you like this feature to work?
+      placeholder: |
+        Example: "Add a --parallel flag that allows downloading multiple anime at once, with a configurable limit..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative solutions or workarounds?
+      placeholder: |
+        Example: "I could run multiple instances of the program, but that would be inconvenient..."
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: What type of feature is this?
+      options:
+        - Download functionality
+        - User interface / UX
+        - Configuration / Settings
+        - Performance improvement
+        - Search / Discovery
+        - Episode management
+        - Network / Connection handling
+        - Database / Tracking
+        - Logging / Debugging
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority (your opinion)
+      description: How important is this feature to you?
+      options:
+        - Low - Nice to have
+        - Medium - Would improve my workflow
+        - High - Important for my use case
+        - Critical - Blocking my usage
+    validations:
+      required: true
+
+  - type: textarea
+    id: mockup
+    attributes:
+      label: Mockup / Examples
+      description: If applicable, provide examples, mockups, or screenshots of how this might work
+      placeholder: |
+        Example CLI usage:
+        ```bash
+        python Alchemix_AWDL.py download --parallel 3 ANIME_URL_1 ANIME_URL_2 ANIME_URL_3
+        ```
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other context, links, or references about the feature request
+      placeholder: "Similar feature in other tools..."
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have searched existing issues to ensure this feature hasn't been requested
+          required: true
+        - label: This feature aligns with the project's goals (CLI anime downloader)
+          required: true
+        - label: I have provided clear use case and benefits
+          required: true
