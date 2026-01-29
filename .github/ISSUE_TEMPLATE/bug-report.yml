@@ -1,0 +1,129 @@
+name: Bug Report
+description: Report a bug or issue with Alchemix AWDL
+title: "[BUG] "
+labels: ["bug"]
+assignees:
+  - xAlcahest
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report
+
+        Thank you for taking the time to report a bug! Please provide as much detail as possible
+        to help us identify and fix the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is
+      placeholder: |
+        Example: "The downloader crashes when trying to download episode 12 of..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Run command '...'
+        2. Select option '...'
+        3. Error appears
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen
+      placeholder: "The download should complete successfully..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened
+      placeholder: "The program crashed with error..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-output
+    attributes:
+      label: Error Output / Logs
+      description: Paste any error messages or relevant log output
+      placeholder: |
+        ```
+        Paste error messages or logs here
+        ```
+      render: shell
+
+  - type: input
+    id: version
+    attributes:
+      label: Alchemix AWDL Version
+      description: Run `python Alchemix_AWDL.py --version` to get the version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: What OS are you running?
+      options:
+        - Linux (x86_64)
+        - Linux (ARM64)
+        - Windows (x86_64)
+        - Windows (ARM64)
+        - macOS (x86_64)
+        - macOS (ARM64)
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python Version
+      description: Run `python --version` to get your Python version
+      placeholder: "3.11.5"
+    validations:
+      required: true
+
+  - type: textarea
+    id: config
+    attributes:
+      label: Configuration (if relevant)
+      description: Share relevant parts of your config.toml if the issue is configuration-related
+      placeholder: |
+        ```toml
+        Paste relevant config here
+        ```
+      render: toml
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Any other context about the problem
+      placeholder: "This started happening after..."
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission Checklist
+      options:
+        - label: I have searched existing issues to ensure this is not a duplicate
+          required: true
+        - label: I am using the latest version of Alchemix AWDL
+          required: true
+        - label: I have provided all required information above
+          required: true
