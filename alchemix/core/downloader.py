@@ -102,11 +102,12 @@ class DownloadManager:
 
             console.print(f"[cyan]Downloading:[/cyan] {output_path.name}")
 
-            # Build Axel command
+            # Build Axel command with quiet flag to suppress connection messages
             cmd = self.axel_manager.build_command(
                 url=url,
                 output=str(output_path),
                 connections=connections,
+                quiet=True,  # Suppress "Connection X finished" messages
                 user_agent=self.config.get("network", {}).get("user_agent", ""),
                 speed_limit=self.config.get("network", {}).get("speed_limit", 0)
             )
