@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""
+r"""
     _    _      _                    _           ___        ______  _
    / \  | | ___| |__   ___ _ __ ___ (_)_  __    / \ \      / /  _ \| |
   / _ \ | |/ __| '_ \ / _ \ '_ ` _ \| \ \/ /   / _ \ \ /\ / /| | | | |
@@ -32,7 +32,7 @@ from animeworld_dl.ui.i18n import get_i18n
 
 __version__ = "1.0.0"
 
-BANNER = """
+BANNER = r"""
     _    _      _                    _           ___        ______  _
    / \  | | ___| |__   ___ _ __ ___ (_)_  __    / \ \      / /  _ \| |
   / _ \ | |/ __| '_ \ / _ \ '_ ` _ \| \ \/ /   / _ \ \ /\ / /| | | | |
@@ -52,16 +52,16 @@ class AnimeWorldDownloader:
         self.i18n = get_i18n()
 
         # Set language
-        lang = self.config.get("ui", "language", "en")
+        lang = self.config_manager.get("ui", "language", "en")
         self.i18n.set_language(lang)
 
         # Setup logging
-        log_dir = self.config_manager.get_logs_dir() if self.config.get("logging", "enabled", True) else None
-        verbosity = self.config.get("ui", "verbosity", "normal")
+        log_dir = self.config_manager.get_logs_dir() if self.config_manager.get("logging", "enabled", True) else None
+        verbosity = self.config_manager.get("ui", "verbosity", "normal")
         setup_logging(log_dir, verbosity)
 
         # Initialize database
-        db_path = Path(self.config.get("advanced", "database_path", ""))
+        db_path = Path(self.config_manager.get("advanced", "database_path", ""))
         self.db = Database(db_path)
 
         # Initialize components (lazy)
@@ -73,11 +73,11 @@ class AnimeWorldDownloader:
         """Initialize components lazily"""
         if not self.axel_manager:
             self.axel_manager = AxelManager(self.config_manager.config_dir)
-            use_system = self.config.get("axel", "use_system_binary", True)
+            use_system = self.config_manager.get("axel", "use_system_binary", True)
             self.axel_manager.ensure_axel(use_system)
 
         if not self.scraper:
-            timeout = self.config.get("network", "http_timeout", 10)
+            timeout = self.config_manager.get("network", "http_timeout", 10)
             self.scraper = AnimeWorldScraper(timeout)
 
         if not self.downloader:
@@ -92,7 +92,7 @@ class AnimeWorldDownloader:
 
         # Run speedtest
         try:
-            tester = SpeedTester(self.config.get("speedtest", "timeout", 30))
+            tester = SpeedTester(self.config_manager.get("speedtest", "timeout", 30))
             download_mbps, upload_mbps, ping = tester.test_with_retry()
 
             # Calculate connections
@@ -127,7 +127,7 @@ class AnimeWorldDownloader:
 
         # Apply fuzzy matching if enabled
         if fuzzy:
-            threshold = self.config.get("search", "fuzzy_threshold", 70)
+            threshold = self.config_manager.get("search", "fuzzy_threshold", 70)
             scored_results = [
                 (result, fuzz.partial_ratio(query.lower(), result["title"].lower()))
                 for result in results
@@ -225,10 +225,10 @@ class AnimeWorldDownloader:
 
         # Get connections count
         if connections is None:
-            connections = self.config.get("speedtest", "connections", 4)
+            connections = self.config_manager.get("speedtest", "connections", 4)
 
         # Download each episode
-        output_dir = Path(self.config.get("download", "output_dir", ""))
+        output_dir = Path(self.config_manager.get("download", "output_dir", ""))
         anime_dir = output_dir / anime_info["title"]
 
         for episode in selected_episodes:
@@ -241,7 +241,7 @@ class AnimeWorldDownloader:
                     anime_title=anime_info["title"],
                     episode_number=episode["number"],
                     season=1,  # TODO: detect from seasons
-                    pattern=self.config.get("download", "naming_pattern", "original")
+                    pattern=self.config_manager.get("download", "naming_pattern", "original")
                 )
 
                 output_path = anime_dir / filename
@@ -256,8 +256,8 @@ class AnimeWorldDownloader:
                     url=video_url,
                     output_path=output_path,
                     connections=connections,
-                    max_attempts=self.config.get("download", "retry_attempts", 3),
-                    backoff=self.config.get("download", "retry_backoff", True)
+                    max_attempts=self.config_manager.get("download", "retry_attempts", 3),
+                    backoff=self.config_manager.get("download", "retry_backoff", True)
                 )
 
                 if success:

@@ -194,7 +194,7 @@ class InteractiveMenu:
 
         # Ask for connection override
         use_custom = Prompt.ask(
-            f"\n[yellow]Override connections? (current: {self.app.config.get('speedtest', 'connections', 4)})[/yellow]",
+            f"\n[yellow]Override connections? (current: {self.app.config_manager.get('speedtest', 'connections', 4)})[/yellow]",
             choices=["y", "n"],
             default="n"
         )
@@ -203,7 +203,7 @@ class InteractiveMenu:
         if use_custom == "y":
             connections = IntPrompt.ask(
                 "[yellow]Enter number of connections[/yellow]",
-                default=self.app.config.get('speedtest', 'connections', 4)
+                default=self.app.config_manager.get('speedtest', 'connections', 4)
             )
 
         # Start download
