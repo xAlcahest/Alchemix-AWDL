@@ -15,7 +15,7 @@ AnimeWorld Downloader is a CLI tool for downloading anime from AnimeWorld.ac wit
 pip install -r requirements.txt
 
 # Run the application
-python animeworld_dl.py --help
+python Alchemix_AWDL.py --help
 
 # Install in development mode
 pip install -e .
@@ -38,14 +38,14 @@ python test_installation.py
 
 ```bash
 # First run triggers speed test and config creation
-python animeworld_dl.py search "anime name"
+python Alchemix_AWDL.py search "anime name"
 
 # Main commands
-python animeworld_dl.py search "query"           # Search for anime
-python animeworld_dl.py list "ANIME_URL"         # List episodes
-python animeworld_dl.py download "URL" --episodes all
-python animeworld_dl.py config --show            # View configuration
-python animeworld_dl.py --retest                 # Re-run speed test
+python Alchemix_AWDL.py search "query"           # Search for anime
+python Alchemix_AWDL.py list "ANIME_URL"         # List episodes
+python Alchemix_AWDL.py download "URL" --episodes all
+python Alchemix_AWDL.py config --show            # View configuration
+python Alchemix_AWDL.py --retest                 # Re-run speed test
 ```
 
 ## Architecture Overview
@@ -56,21 +56,21 @@ The application follows a modular architecture with lazy initialization of heavy
 
 ### Module Structure
 
-**animeworld_dl/core/** - Business logic
+**alchemix/core/** - Business logic
 - `config.py`: TOML configuration with connection tier mapping (10 tiers from <10 Mbps to >1.5 Gbps)
 - `speedtest_manager.py`: Speed testing with automatic tier calculation
 - `scraper.py`: BeautifulSoup-based HTML parsing for AnimeWorld
 - `downloader.py`: Axel wrapper with retry/backoff and resume support
 - `database.py`: SQLite3 operations for tracking anime/episodes/downloads
 
-**animeworld_dl/ui/** - User interface
+**alchemix/ui/** - User interface
 - `i18n.py`: Translation system (TRANSLATIONS dict with IT/EN keys)
 - `logger.py`: Rich-based logging with i18n integration
 
-**animeworld_dl/utils/** - Utilities
+**alchemix/utils/** - Utilities
 - `axel_manager.py`: Binary download/management for Windows (x64/ARM64) and Linux (x64/ARM64)
 
-**animeworld_dl.py** - Click-based CLI entry point with commands: search, list, download, config
+**Alchemix_AWDL.py** - Click-based CLI entry point with commands: search, list, download, config
 
 ### Key Data Flow
 
@@ -84,10 +84,10 @@ The core intelligence is in `config.py:CONNECTION_TIERS` - a list of `(min_mbps,
 
 ### State Management
 
-- **Config**: TOML at `~/.config/animeworld-dl/config.toml` (loaded at init, saved after changes)
-- **Database**: SQLite at `~/.config/animeworld-dl/animeworld.db` (tracks anime metadata, episodes, download status)
-- **Logs**: Rich logs to `~/.config/animeworld-dl/logs/animeworld_dl.log`
-- **Axel Binaries**: Downloaded to `~/.config/animeworld-dl/bin/` if system Axel unavailable
+- **Config**: TOML at `~/.config/alchemix-awdl/config.toml` (loaded at init, saved after changes)
+- **Database**: SQLite at `~/.config/alchemix-awdl/animeworld.db` (tracks anime metadata, episodes, download status)
+- **Logs**: Rich logs to `~/.config/alchemix-awdl/logs/animeworld_dl.log`
+- **Axel Binaries**: Downloaded to `~/.config/alchemix-awdl/bin/` if system Axel unavailable
 
 ### Scraper Implementation Notes
 
@@ -161,7 +161,7 @@ Modify `core/config.py:CONNECTION_TIERS` list. Format: `(min_speed, max_speed, c
 
 ### Adding CLI Commands
 
-1. Define command function with `@cli.command()` decorator in `animeworld_dl.py`
+1. Define command function with `@cli.command()` decorator in `Alchemix_AWDL.py`
 2. Add Click options/arguments as needed
 3. Access app via `ctx.obj["app"]`
 4. Add translations for any new UI strings in `ui/i18n.py`
@@ -175,7 +175,7 @@ If AnimeWorld changes HTML structure:
 
 ## User Data Locations
 
-All user data under `~/.config/animeworld-dl/`:
+All user data under `~/.config/alchemix-awdl/`:
 - `config.toml` - Configuration
 - `animeworld.db` - Download tracking database
 - `logs/animeworld_dl.log` - Application logs

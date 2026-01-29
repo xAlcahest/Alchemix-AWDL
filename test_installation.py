@@ -54,28 +54,28 @@ if missing:
 # Test 3: Module imports
 print("\n[3/8] Testing module imports...")
 try:
-    from animeworld_dl.core.config import Config
+    from alchemix.core.config import Config
     print("  ✓ config")
 
-    from animeworld_dl.core.speedtest_manager import SpeedTester
+    from alchemix.core.speedtest_manager import SpeedTester
     print("  ✓ speedtest_manager")
 
-    from animeworld_dl.core.scraper import AlchemixScraper
+    from alchemix.core.scraper import AlchemixScraper
     print("  ✓ scraper")
 
-    from animeworld_dl.core.downloader import DownloadManager
+    from alchemix.core.downloader import DownloadManager
     print("  ✓ downloader")
 
-    from animeworld_dl.core.database import Database
+    from alchemix.core.database import Database
     print("  ✓ database")
 
-    from animeworld_dl.utils.axel_manager import AxelManager
+    from alchemix.utils.axel_manager import AxelManager
     print("  ✓ axel_manager")
 
-    from animeworld_dl.ui.logger import get_logger
+    from alchemix.ui.logger import get_logger
     print("  ✓ logger")
 
-    from animeworld_dl.ui.i18n import get_i18n
+    from alchemix.ui.i18n import get_i18n
     print("  ✓ i18n")
 
 except ImportError as e:
@@ -173,7 +173,7 @@ print("\n" + "=" * 60)
 print("✓ All tests passed!")
 print("=" * 60)
 print("\nYou can now run the downloader:")
-print("  python animeworld_dl.py --help")
+print("  python Alchemix_AWDL.py --help")
 print("\nFor first-time setup:")
-print("  python animeworld_dl.py search \"anime name\"")
+print("  python Alchemix_AWDL.py search \"anime name\"")
 print("=" * 60)
