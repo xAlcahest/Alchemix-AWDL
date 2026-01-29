@@ -18,17 +18,17 @@ from rich.table import Table
 from rich.prompt import Prompt, Confirm
 from rapidfuzz import fuzz
 
-from animeworld_dl.core.config import Config
-from animeworld_dl.core.speedtest_manager import SpeedTester, get_current_timestamp
-from animeworld_dl.core.scraper import AlchemixScraper
-from animeworld_dl.core.downloader import DownloadManager
-from animeworld_dl.core.database import Database
-from animeworld_dl.utils.axel_manager import AxelManager
-from animeworld_dl.ui.logger import (
+from alchemix.core.config import Config
+from alchemix.core.speedtest_manager import SpeedTester, get_current_timestamp
+from alchemix.core.scraper import AlchemixScraper
+from alchemix.core.downloader import DownloadManager
+from alchemix.core.database import Database
+from alchemix.utils.axel_manager import AxelManager
+from alchemix.ui.logger import (
     setup_logging, get_logger, console,
     print_header, print_success, print_error, print_warning, print_info
 )
-from animeworld_dl.ui.i18n import get_i18n
+from alchemix.ui.i18n import get_i18n
 
 __version__ = "1.0.0"
 
@@ -173,6 +173,17 @@ class AlchemixDownloader:
             total_episodes=anime_info["total_episodes"]
         )
 
+        # Add all episodes to database
+        for season_episodes in anime_info["seasons"].values():
+            for ep in season_episodes:
+                self.db.add_episode(
+                    ep["id"],
+                    anime_info["id"],
+                    ep["number"],
+                    title=ep["title"],
+                    url=ep["url"]
+                )
+
         # Display info
         console.print(f"\n[bold cyan]{anime_info['title']}[/bold cyan]")
         console.print(f"Total Episodes: {anime_info['total_episodes']}")
@@ -210,6 +221,27 @@ class AlchemixDownloader:
 
         # Get anime info
         anime_info = self.scraper.get_anime_info(anime_url)
+
+        # Save anime to database
+        self.db.add_anime(
+            anime_info["id"],
+            anime_info["title"],
+            url=anime_info["url"],
+            description=anime_info["description"],
+            genres=anime_info["genres"],
+            total_episodes=anime_info["total_episodes"]
+        )
+
+        # Add all episodes to database
+        for season_episodes in anime_info["seasons"].values():
+            for ep in season_episodes:
+                self.db.add_episode(
+                    ep["id"],
+                    anime_info["id"],
+                    ep["number"],
+                    title=ep["title"],
+                    url=ep["url"]
+                )
 
         # Parse episode selection
         selected_episodes = self._parse_episode_selection(
@@ -367,7 +399,7 @@ def cli(ctx, retest, interactive):
 
     # If no command is provided, enter interactive mode
     if ctx.invoked_subcommand is None:
-        from animeworld_dl.ui.interactive import InteractiveMenu
+        from alchemix.ui.interactive import InteractiveMenu
         menu = InteractiveMenu(app)
         menu.run()
 

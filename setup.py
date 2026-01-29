@@ -7,13 +7,13 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
     requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
 
 setup(
-    name="animeworld-downloader",
+    name="alchemix-awdl",
     version="1.0.0",
-    author="AnimeWorld Downloader Team",
+    author="Alchemix",
     description="Advanced CLI downloader for AnimeWorld.ac with intelligent connection management",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/animeworld-downloader",
+    url="https://github.com/xAlcahest/Alchemix-AWDL",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -32,7 +32,7 @@ setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "animeworld-dl=animeworld_dl:main",
+            "alchemix-awdl=Alchemix_AWDL:main",
         ],
     },
 )

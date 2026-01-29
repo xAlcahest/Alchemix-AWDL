@@ -35,7 +35,7 @@ Based on your internet speed, connections are automatically configured:
 
 ```bash
 pip install -r requirements.txt
-python animeworld_dl.py --help
+python Alchemix_AWDL.py --help
 ```
 
 ## Usage
@@ -45,7 +45,7 @@ python animeworld_dl.py --help
 Simply run without arguments to enter the interactive menu:
 
 ```bash
-python animeworld_dl.py
+python Alchemix_AWDL.py
 ```
 
 This launches a user-friendly menu where you can:
@@ -61,28 +61,28 @@ For scripting and automation, use direct commands:
 
 ```bash
 # Search for an anime
-python animeworld_dl.py search "jujutsu kaisen"
+python Alchemix_AWDL.py search "jujutsu kaisen"
 
 # List episodes
-python animeworld_dl.py list "https://www.animeworld.ac/play/anime-url"
+python Alchemix_AWDL.py list "https://www.animeworld.ac/play/anime-url"
 
 # Download all episodes
-python animeworld_dl.py download "ANIME_URL" --episodes all
+python Alchemix_AWDL.py download "ANIME_URL" --episodes all
 
 # Download specific range
-python animeworld_dl.py download "ANIME_URL" --episodes 1-24
+python Alchemix_AWDL.py download "ANIME_URL" --episodes 1-24
 
 # Download specific episodes
-python animeworld_dl.py download "ANIME_URL" --episodes 1,5,10,12
+python Alchemix_AWDL.py download "ANIME_URL" --episodes 1,5,10,12
 
 # Override connection count
-python animeworld_dl.py download "ANIME_URL" --episodes all --connections 64
+python Alchemix_AWDL.py download "ANIME_URL" --episodes all --connections 64
 
 # Retest your connection
-python animeworld_dl.py --retest
+python Alchemix_AWDL.py --retest
 
 # Configure settings
-python animeworld_dl.py config --show
+python Alchemix_AWDL.py config --show
 ```
 
 ## Configuration
