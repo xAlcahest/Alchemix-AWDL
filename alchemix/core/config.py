@@ -18,7 +18,7 @@ DEFAULT_CONFIG = {
         "timeout": 30
     },
     "download": {
-        "output_dir": str(Path.home() / "Downloads" / "AnimeWorld"),
+        "output_dir": str(Path(__file__).parent.parent.parent / "Video_DL"),
         "naming_pattern": "original",  # original, season_episode, custom
         "custom_pattern": "{anime_name} - S{season:02d}E{episode:02d}.{ext}",
         "parallel_episodes": 1,  # Sequential by default
